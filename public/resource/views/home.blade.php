@@ -7,7 +7,7 @@
 @section('contenido')
 
 
-     
+     @if(!Auth::user()->hasVerifiedEmail())
     
           <div class="alert alert-danger">
            
@@ -17,6 +17,8 @@
                             {{ __('A fresh verification link has been sent to your email address.') }}
                      
                     @endif
+                    
+                    
 
                     Antes de continuar, por favor confirme su correo electronico con el enlace de verificatión que le fue enviado.Si no ha recibido el correo electronico 
                     ,
@@ -26,7 +28,7 @@
                     </form>
       
           </div>
-
+   @endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
