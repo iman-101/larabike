@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\BikeRequest;
+use App\Http\Requests\BikeUpdateRequest;
+
 
 class BikeController extends Controller
 {

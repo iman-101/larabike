@@ -69,16 +69,17 @@
                           alt="Ver detalles" title="Ver detalles">
                        </a>
                        @auth
+                       @if(Auth::user()->can('update',$bike))
                         <a  href="{{route('bikes.edit',$bike->id)}}">
-                         <img height="30" width="30" src="{{asset('img/buttons/update.png')}}"
-                          alt="Modificar" title="Modificar">
-                       </a>
+                         <img height="30" width="30" src="{{asset('img/buttons/update.png')}}"></a>
+                       @endif
                        
+                       @if(Auth::user()->can('delete',$bike))
                         <a  href="{{route('bikes.delete',$bike->id)}}">
                          <img height="30" width="30" src="{{asset('img/buttons/delete.png')}}"
                           alt="Borrar" title="Borrar">
                        </a>
-                       
+                       @endif
                        @endauth
                     </td>
                     </tr>
