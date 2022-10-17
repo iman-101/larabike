@@ -83,6 +83,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes(['verify'=>true]);
 
+Route::get('/chnk',function(){
+    
+    \App\Models\Shop::chunk(2,function($pedazo){
+    
+        foreach($pedazo as $tienda){
+            echo $tienda->nombre."<br>";
+            echo $tienda->poblacion."<br>";
+            echo "------------------------------------<br>";
+        }
+    });
+});
+
 
 
 

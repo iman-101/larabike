@@ -14,6 +14,10 @@
                 <td>Modelo</td>
                 <td>{{$bike->marca}}</td>
               </tr>
+                <tr>
+              <td>Propietario</td>
+                <td>{{$bike->user? $bike->user->name : 'Sin propietario'}}</td>
+              </tr>
               <tr>
               
                   <td>Precio</td>
