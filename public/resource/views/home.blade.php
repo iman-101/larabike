@@ -1,11 +1,7 @@
 @extends('layouts.master')
 
-
-
-
-
 @section('contenido')
-
+         
 
      @if(!Auth::user()->hasVerifiedEmail())
     

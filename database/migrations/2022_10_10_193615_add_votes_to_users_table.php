@@ -14,10 +14,10 @@ class AddVotesToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('poblacion')->unique()->after('email')->nullable();
+            $table->string('poblacion')->after('email')->nullable();
             
-            $table->date('nacimiento')->unique()->after('email')->nullable();
-            $table->string('cp',5)->unique()->after('email')->nullable();
+            $table->date('nacimiento')->after('email')->nullable();
+            $table->string('cp',5)->after('email')->nullable();
         });
     }
 

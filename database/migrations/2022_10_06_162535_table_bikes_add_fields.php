@@ -16,7 +16,7 @@ class TableBikesAddFields extends Migration
         Schema::table('bikes',function(Blueprint $table){
             $table->string('matricula',7)->unique()->after('matriculada')->nullable();
             
-            $table->string('color',7)->unique()->after('matricula')->nullable();
+            $table->string('color',7)->after('matricula')->nullable();
         });
     }
 

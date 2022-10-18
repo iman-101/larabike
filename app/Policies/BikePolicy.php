@@ -53,7 +53,12 @@ class BikePolicy
      */
     public function update(User $user, Bike $bike)
     {
-        return $user->id == $bike->user_id || $user->email == 'admin@larabike.com';
+//         return $user->id == $bike->user_id || $user->email == 'admin@larabike.com';
+
+       
+
+        return $user->id == $bike->user_id ||  $user->hasRole('administrador')
+            ||  $user->hasRole('moderador');
     }
 
     /**
@@ -65,8 +70,10 @@ class BikePolicy
      */
     public function delete(User $user, Bike $bike)
     {
-        return $user->id == $bike->user_id || $user->email == 'admin@larabike.com';
+       // return $user->id == $bike->user_id || $user->email == 'admin@larabike.com';
+       
         
+        return $user->id == $bike->user_id || $user->hasRole('administrador');
     }
 
     /**
