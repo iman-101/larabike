@@ -59,8 +59,8 @@
                                 <a  class="nav-link " href="{{route('home')}}" role="button"  aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} ( {{Auth::user()->email}} )
                                 </a>
-                           </li>
-                           <li class="nav-item mr-2"> 
+                            </li>
+                            <li class="nav-item mr-2"> 
                                     <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -71,7 +71,7 @@
                                         @csrf
                                     </form>
                                
-                            </li>
+                             </li>
                         @endguest
                     </ul>
                 </div>
