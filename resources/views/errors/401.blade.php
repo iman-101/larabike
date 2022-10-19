@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('titulo','Error 401') 
+@section('titulo','') 
 @section('contenido')
 
 
@@ -11,6 +11,11 @@
                 <div class="title mb-5" style="font-size:2rem">
                    {{$exception->getMessage()}}
                 </div>
+                
+                    <img class="rounded" 
+                             alt="Imagen"
+                       
+                         src="{{asset('img/stop.jpg')}}">
             </div>
         </div>   
         

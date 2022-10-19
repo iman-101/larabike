@@ -150,21 +150,22 @@
                    <tr>
                       <th>ID</th>
                        <th>Imagen</th>
+                       <th>Marca</th>
                        <th>Modelo</th>
                        <th>Matricula</th>
-                       <th></th>
-                       <th><th>
+                       <th colspan="2"></th>
+                  
                    </tr>
                 @foreach($deletedBikes as $bike)  
                 <tr>
                      <td><b>#{{$bike->id}}</b></td>
                      <td class="text-center" style="max-with:80px">
-                     <img class="rounded" style="max-with: 80%"
-                         alt="Imagen de {{$bike->marca}} {{$bike->modelo}}"
-                     titule="Image de {{$bike->marca}} {{$bike->modelo}}"
-                     src="{{$bike->imagen?
-                         asset('storage/'.config('filesystems.bikesImageDir')).'/'.$bike->imagen:
-                          asset('storage/'.config('filesystems.bikesImageDir')).'/default.png'}}">
+                         <img class="rounded"  height="50" width="50" 
+                             alt="Imagen de {{$bike->marca}} {{$bike->modelo}}"
+                         title="Image de {{$bike->marca}} {{$bike->modelo}}"
+                         src="{{$bike->imagen?
+                             asset('storage/'.config('filesystems.bikesImageDir')).'/'.$bike->imagen:
+                              asset('storage/'.config('filesystems.bikesImageDir')).'/default.png'}}">
                     </td>
                     <td>{{$bike->marca}}</td>
                     <td>{{$bike->modelo}}</td>
@@ -173,10 +174,8 @@
                        <a href="{{route('bikes.restore',$bike->id)}}">
                           <button class="btn btn-success">Restaurar</button></a>
                        
-                       
-                       
-                    </td class="text-center">
-                    <td>
+                    </td >
+                    <td class="text-center">
                        <form method="POST" action="{{route('bikes.purgue')}}">
                            {{csrf_field()}}
                            <input name="_method" type="hidden" value="DELETE">

@@ -206,19 +206,20 @@ class BikeController extends Controller
     }
     
     public function purgue(Request $request ){
+        
         $bike = Bike::withTrashed()->find($request->input('bike_id'));
         
         if($request->user()->cant('delete',$bike)){
-            abort(401, 'No puedes dborrar una moto que no es tuya');
+            abort(401, 'No puedes borrar una moto que no es tuya');
         }
         
         if($bike->forceDelete() && $bike->imagen){
-           Storage::delete(config('filesystems.bikesImagenDir').'/'.$bikes->imagen);
+           Storage::delete(config('filesystems.bikesImagenDir').'/'.$bike->imagen);
            
         }
         
         return back()
-        ->with('success',"Moto $bike->marca $bike->modelo eleminada definitivamente.");
+        ->with('success',"Moto $bike->marca $bike->modelo eliminada definitivamente.");
     }
     
     
