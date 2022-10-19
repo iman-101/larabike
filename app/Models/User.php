@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
     
     public function bikes(){
-        return  $this->hasMany('\App\Models\Bike');
+        return  $this->hasMany('App\Models\Bike');
     }
     
     public function roles(){
@@ -57,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
         
         foreach($this->roles()->get() as $role){
             
-            if($role->role == $rolName){
+            if($role->rol == $rolName){
                 return true;
             }
         }

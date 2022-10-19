@@ -30,6 +30,12 @@ Route::get('/',[WelcomeController::class,'index'])->name('portada');
 
 
 
+Route::delete('/bikes/purgue',[BikeController::class,'purgue'])
+->name('bikes.purgue');
+
+
+Route::get('/bikes/{bikes}/restore',[BikeController::class,'restore'])
+->name('bikes.restore');
 
 Route::resource('bikes',BikeController::class);
 
@@ -83,6 +89,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Auth::routes(['verify'=>true]);
 
+ 
+       
 Route::get('/chnk',function(){
     
     \App\Models\Shop::chunk(2,function($pedazo){

@@ -55,8 +55,6 @@ class BikePolicy
     {
 //         return $user->id == $bike->user_id || $user->email == 'admin@larabike.com';
 
-       
-
         return $user->id == $bike->user_id ||  $user->hasRole('administrador')
             ||  $user->hasRole('moderador');
     }

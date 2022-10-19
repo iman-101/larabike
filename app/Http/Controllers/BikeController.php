@@ -164,11 +164,13 @@ class BikeController extends Controller
             abort(401, 'No puedes borrar una moto que no es tuya');
         }
       
-        if($bike->delete() && $bike->imagen){
-            Storage::delete(config('filesystems.bikesImageDir').'/'.$bike->imagen);
-        }
+//         if($bike->delete() && $bike->imagen){
+//             Storage::delete(config('filesystems.bikesImageDir').'/'.$bike->imagen);
+//         }
+
+        $bike->delete(); //soft delete (no podemos borar la imagen aun)
         
-        return redirect('/bikes')
+        return redirect()->route('bikes.index')
         ->with('success',"Moto $bike->marca $bike->modelo eleminada");
     }
     
@@ -191,5 +193,71 @@ class BikeController extends Controller
         
                       return view('bikes.list',['bikes'=>$bikes,'marca'=>$marca,'modelo'=>$modelo]);
     }
+    
+    
+    public function restore(int $id){
+        
+        $bike = Bike::withTrashed()->find($id);
+        
+        $bike->restore();
+        
+        return back()->with(
+            'success', "Moto $bike->marca $bike->modelo restaurada correctamente.");
+    }
+    
+    public function purgue(Request $request ){
+        $bike = Bike::withTrashed()->find($request->input('bike_id'));
+        
+        if($request->user()->cant('delete',$bike)){
+            abort(401, 'No puedes dborrar una moto que no es tuya');
+        }
+        
+        if($bike->forceDelete() && $bike->imagen){
+           Storage::delete(config('filesystems.bikesImagenDir').'/'.$bikes->imagen);
+           
+        }
+        
+        return back()
+        ->with('success',"Moto $bike->marca $bike->modelo eleminada definitivamente.");
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

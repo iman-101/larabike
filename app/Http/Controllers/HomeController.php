@@ -25,7 +25,9 @@ class HomeController extends Controller
     {
         
         $bikes = $request->user()->bikes()->paginate(10);
+        
+        $deletedBikes = $request->user()->bikes()->onlyTrashed()->get();
            
-        return view('home',['bikes'=>$bikes]);
+        return view('home',['bikes'=>$bikes, 'deletedBikes'=> $deletedBikes]);
     }
 }
