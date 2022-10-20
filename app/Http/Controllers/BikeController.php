@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\BikeRequest;
 use App\Http\Requests\BikeUpdateRequest;
+use App\Http\Requests\BikeDeleteRequest;
+use App\Events\FirstBikeCreated;
 
 
 class BikeController extends Controller
@@ -66,6 +68,9 @@ class BikeController extends Controller
         $datos['user_id'] = $request->user()->id;
         
         $bike = Bike::create($datos);
+        
+        if($request->user()->bikes->count() == 1)
+            FirstBikeCreated::dispatch($bike, $request->user());
         
         return redirect()
               ->route('bikes.show',$bike->id)
@@ -145,24 +150,26 @@ class BikeController extends Controller
         
         return back()->with('success',"Moto $bike->marca $bike->modelo actualizada");
     }
-    public function delete(Request $request, Bike $bike){
+    public function delete(BikeDeleteRequest $request, Bike $bike){
         
      //   $bike = Bike::findOrFail($id);
-        if($request->user()->cant('delete', $bike)){
+//         if($request->user()->cant('delete', $bike)){
             
-            abort(401, 'No puedes borrar una moto que no es tuya');
-        }
+//             abort(401, 'No puedes borrar una moto que no es tuya');
+//         }
         return view('bikes.delete',['bike'=>$bike]);
     }
   
-    public function destroy(Request $request,Bike $bike)
+    public function destroy(BikeDeleteRequest $request,Bike $bike)
     {
 //         $bike = Bike::findOrFail($id);
 //         $bike->delete();
+
+        /*
         if($request->user()->cant('delete', $bike)){
             
             abort(401, 'No puedes borrar una moto que no es tuya');
-        }
+        }*/
       
 //         if($bike->delete() && $bike->imagen){
 //             Storage::delete(config('filesystems.bikesImageDir').'/'.$bike->imagen);
@@ -219,20 +226,10 @@ class BikeController extends Controller
         }
         
         return back()
-        ->with('success',"Moto $bike->marca $bike->modelo eliminada definitivamente.");
+                ->with('success',"Moto $bike->marca $bike->modelo eliminada definitivamente.");
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+  
     
     
     
