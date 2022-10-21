@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Models\Bike;
+// use Illuminate\Http\Request;
+// use App\Models\Bike;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BikeApiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +17,33 @@ use App\Models\Bike;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/motos', [BikeApiController::class, 'index']);
+
+Route::get('/moto/{bike}',[BikeApiController::class, 'show'])
+       ->where('bike','^\d+$');
+
+
+Route::get('/motos/{campo}/{valor}',[BikeApiController::class, 'search'])
+       ->where('campo','^marca|modelo|matricula$');
+
+Route::post('/moto',[BikeApiController::class, 'store']);
+       
+Route::put('/moto/{bike}',[BikeApiController::class, 'update']);
+
+Route::delete('/moto/{bike}',[BikeApiController::class, 'delete']);
+
+Route::fallback(function(){
+    return ['status' =>'BAD REQUEST'];
 });
 
 
- Route::get('/bikes', function(){
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+
+//  Route::get('/bikes', function(){
         
      
-     return response(Bike::all());
-});
+//      return response(Bike::all());
+// });
